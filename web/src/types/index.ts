@@ -1,4 +1,4 @@
-/** Shared type definitions for the GameGobler Web UI. */
+/** Shared type definitions for the GameGobbler Web UI. */
 
 export interface StorageInfo {
   path: string;

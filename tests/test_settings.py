@@ -1,11 +1,11 @@
-"""Tests for gamegobler.settings — centralized settings I/O."""
+"""Tests for gamegobbler.settings — centralized settings I/O."""
 
 import json
 from pathlib import Path
 
 import pytest
 
-from gamegobler import settings
+from gamegobbler import settings
 
 
 @pytest.fixture()

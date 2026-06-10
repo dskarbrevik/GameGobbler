@@ -25,13 +25,13 @@ jobs:
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            sidecar: gamegobler-api-x86_64-unknown-linux-gnu
+            sidecar: gamegobbler-api-x86_64-unknown-linux-gnu
           - os: macos-latest
             target: aarch64-apple-darwin
-            sidecar: gamegobler-api-aarch64-apple-darwin
+            sidecar: gamegobbler-api-aarch64-apple-darwin
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            sidecar: gamegobler-api-x86_64-pc-windows-msvc.exe
+            sidecar: gamegobbler-api-x86_64-pc-windows-msvc.exe
 
     steps:
       - uses: actions/checkout@v4
@@ -60,16 +60,16 @@ jobs:
           npx vite build
 
       - name: Package Python backend with PyInstaller
-        run: uv run pyinstaller gamegobler.spec --noconfirm
+        run: uv run pyinstaller gamegobbler.spec --noconfirm
 
       - name: Place sidecar binary
         shell: bash
         run: |
           mkdir -p web/src-tauri/binaries
           if [ "${{ runner.os }}" = "Windows" ]; then
-            cp dist/GameGobler.exe "web/src-tauri/binaries/${{ matrix.sidecar }}"
+            cp dist/GameGobbler.exe "web/src-tauri/binaries/${{ matrix.sidecar }}"
           else
-            cp dist/GameGobler "web/src-tauri/binaries/${{ matrix.sidecar }}"
+            cp dist/GameGobbler "web/src-tauri/binaries/${{ matrix.sidecar }}"
             chmod +x "web/src-tauri/binaries/${{ matrix.sidecar }}"
           fi
 
@@ -155,7 +155,7 @@ jobs:
           projectPath: web
           tauriScript: npx tauri
           tagName: ${{ env.RELEASE_TAG }}
-          releaseName: "GameGobler ${{ env.RELEASE_TAG }}"
+          releaseName: "GameGobbler ${{ env.RELEASE_TAG }}"
           releaseBody: "See the full changelog in the GitHub release notes."
           releaseDraft: false
           prerelease: false

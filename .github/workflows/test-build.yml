@@ -27,16 +27,16 @@ jobs:
       - id: set
         run: |
           if [ "${{ inputs.platforms }}" = "all" ]; then
-            SIDECAR='{"include":[{"os":"ubuntu-latest","target":"x86_64-unknown-linux-gnu","sidecar":"gamegobler-api-x86_64-unknown-linux-gnu"},{"os":"macos-latest","target":"aarch64-apple-darwin","sidecar":"gamegobler-api-aarch64-apple-darwin"},{"os":"windows-latest","target":"x86_64-pc-windows-msvc","sidecar":"gamegobler-api-x86_64-pc-windows-msvc.exe"}]}'
+            SIDECAR='{"include":[{"os":"ubuntu-latest","target":"x86_64-unknown-linux-gnu","sidecar":"gamegobbler-api-x86_64-unknown-linux-gnu"},{"os":"macos-latest","target":"aarch64-apple-darwin","sidecar":"gamegobbler-api-aarch64-apple-darwin"},{"os":"windows-latest","target":"x86_64-pc-windows-msvc","sidecar":"gamegobbler-api-x86_64-pc-windows-msvc.exe"}]}'
             TAURI='{"include":[{"os":"ubuntu-latest","target":"x86_64-unknown-linux-gnu"},{"os":"macos-latest","target":"aarch64-apple-darwin"},{"os":"windows-latest","target":"x86_64-pc-windows-msvc"}]}'
           elif [ "${{ inputs.platforms }}" = "linux" ]; then
-            SIDECAR='{"include":[{"os":"ubuntu-latest","target":"x86_64-unknown-linux-gnu","sidecar":"gamegobler-api-x86_64-unknown-linux-gnu"}]}'
+            SIDECAR='{"include":[{"os":"ubuntu-latest","target":"x86_64-unknown-linux-gnu","sidecar":"gamegobbler-api-x86_64-unknown-linux-gnu"}]}'
             TAURI='{"include":[{"os":"ubuntu-latest","target":"x86_64-unknown-linux-gnu"}]}'
           elif [ "${{ inputs.platforms }}" = "macos" ]; then
-            SIDECAR='{"include":[{"os":"macos-latest","target":"aarch64-apple-darwin","sidecar":"gamegobler-api-aarch64-apple-darwin"}]}'
+            SIDECAR='{"include":[{"os":"macos-latest","target":"aarch64-apple-darwin","sidecar":"gamegobbler-api-aarch64-apple-darwin"}]}'
             TAURI='{"include":[{"os":"macos-latest","target":"aarch64-apple-darwin"}]}'
           elif [ "${{ inputs.platforms }}" = "windows" ]; then
-            SIDECAR='{"include":[{"os":"windows-latest","target":"x86_64-pc-windows-msvc","sidecar":"gamegobler-api-x86_64-pc-windows-msvc.exe"}]}'
+            SIDECAR='{"include":[{"os":"windows-latest","target":"x86_64-pc-windows-msvc","sidecar":"gamegobbler-api-x86_64-pc-windows-msvc.exe"}]}'
             TAURI='{"include":[{"os":"windows-latest","target":"x86_64-pc-windows-msvc"}]}'
           fi
           echo "sidecar=$SIDECAR" >> "$GITHUB_OUTPUT"
@@ -75,16 +75,16 @@ jobs:
           npx vite build
 
       - name: Package backend with PyInstaller
-        run: uv run pyinstaller gamegobler.spec --noconfirm
+        run: uv run pyinstaller gamegobbler.spec --noconfirm
 
       - name: Place sidecar binary
         shell: bash
         run: |
           mkdir -p web/src-tauri/binaries
           if [ "${{ runner.os }}" = "Windows" ]; then
-            cp dist/GameGobler.exe "web/src-tauri/binaries/${{ matrix.sidecar }}"
+            cp dist/GameGobbler.exe "web/src-tauri/binaries/${{ matrix.sidecar }}"
           else
-            cp dist/GameGobler "web/src-tauri/binaries/${{ matrix.sidecar }}"
+            cp dist/GameGobbler "web/src-tauri/binaries/${{ matrix.sidecar }}"
             chmod +x "web/src-tauri/binaries/${{ matrix.sidecar }}"
           fi
 
@@ -205,8 +205,8 @@ jobs:
         run: |
           DMG=$(find artifact/ -name '*.dmg' | head -1)
           hdiutil attach "$DMG" -nobrowse -noverify
-          APP=$(find /Volumes -name 'GameGobler.app' -maxdepth 2 | head -1)
-          open -a "$APP" --args --headless 2>/dev/null || "$APP/Contents/MacOS/gamegobler-tauri" &
+          APP=$(find /Volumes -name 'GameGobbler.app' -maxdepth 2 | head -1)
+          open -a "$APP" --args --headless 2>/dev/null || "$APP/Contents/MacOS/gamegobbler-tauri" &
           APP_PID=$!
           echo "APP_PID=$APP_PID" >> "$GITHUB_ENV"
 
@@ -218,9 +218,9 @@ jobs:
           $msi = Get-ChildItem -Path artifact -Recurse -Filter '*.msi' | Select-Object -First 1
           Write-Host "Installing $($msi.FullName)"
           Start-Process msiexec -ArgumentList "/i `"$($msi.FullName)`" /quiet /norestart" -Wait
-          $exe = Get-ChildItem -Path "$env:LOCALAPPDATA\Programs" -Recurse -Filter 'gamegobler-tauri.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+          $exe = Get-ChildItem -Path "$env:LOCALAPPDATA\Programs" -Recurse -Filter 'gamegobbler-tauri.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
           if (-not $exe) {
-            $exe = Get-ChildItem -Path "C:\Program Files" -Recurse -Filter 'gamegobler-tauri.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+            $exe = Get-ChildItem -Path "C:\Program Files" -Recurse -Filter 'gamegobbler-tauri.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
           }
           Write-Host "Launching $($exe.FullName)"
           $proc = Start-Process -FilePath $exe.FullName -PassThru
@@ -270,7 +270,7 @@ jobs:
           if [ -n "$APP_PID" ]; then
             kill "$APP_PID" 2>/dev/null || true
           fi
-          pkill -f gamegobler-api 2>/dev/null || true
+          pkill -f gamegobbler-api 2>/dev/null || true
 
       - name: Stop app (Windows)
         if: always() && runner.os == 'Windows'
@@ -279,4 +279,4 @@ jobs:
           if ($env:APP_PID) {
             Stop-Process -Id $env:APP_PID -Force -ErrorAction SilentlyContinue
           }
-          Get-Process -Name 'gamegobler*' -ErrorAction SilentlyContinue | Stop-Process -Force
+          Get-Process -Name 'gamegobbler*' -ErrorAction SilentlyContinue | Stop-Process -Force

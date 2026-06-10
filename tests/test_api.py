@@ -1,4 +1,4 @@
-"""Tests for the GameGobler API — settings, health, and library routes.
+"""Tests for the GameGobbler API — settings, health, and library routes.
 
 Uses FastAPI TestClient (sync) with a temporary library directory.
 """
@@ -10,15 +10,15 @@ from unittest.mock import patch
 import pytest
 from fastapi.testclient import TestClient
 
-from gamegobler import settings
-from gamegobler.api.main import app
+from gamegobbler import settings
+from gamegobbler.api.main import app
 
 
 @pytest.fixture()
 def _isolate_settings(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     """Redirect settings to tmp so tests don't touch real config."""
-    monkeypatch.setattr(settings, "SETTINGS_DIR", tmp_path / ".gamegobler")
-    monkeypatch.setattr(settings, "SETTINGS_PATH", tmp_path / ".gamegobler" / "settings.json")
+    monkeypatch.setattr(settings, "SETTINGS_DIR", tmp_path / ".gamegobbler")
+    monkeypatch.setattr(settings, "SETTINGS_PATH", tmp_path / ".gamegobbler" / "settings.json")
 
 
 @pytest.fixture()

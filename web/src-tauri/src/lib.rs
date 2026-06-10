@@ -7,10 +7,10 @@ use tauri_plugin_updater::UpdaterExt;
 /// Start the Python backend sidecar and wait for it to be ready.
 fn spawn_backend(app: &tauri::AppHandle) {
     let shell = app.shell();
-    let sidecar = match shell.sidecar("gamegobler-api") {
+    let sidecar = match shell.sidecar("gamegobbler-api") {
         Ok(cmd) => cmd,
         Err(e) => {
-            log::error!("failed to create gamegobler-api sidecar command: {}", e);
+            log::error!("failed to create gamegobbler-api sidecar command: {}", e);
             return;
         }
     };
@@ -18,7 +18,7 @@ fn spawn_backend(app: &tauri::AppHandle) {
     let (mut rx, child) = match sidecar.spawn() {
         Ok(result) => result,
         Err(e) => {
-            log::error!("failed to spawn gamegobler-api sidecar: {}", e);
+            log::error!("failed to spawn gamegobbler-api sidecar: {}", e);
             return;
         }
     };
@@ -48,13 +48,13 @@ fn spawn_backend(app: &tauri::AppHandle) {
 }
 
 fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
-    let show = MenuItemBuilder::with_id("show", "Show GameGobler").build(app)?;
+    let show = MenuItemBuilder::with_id("show", "Show GameGobbler").build(app)?;
     let quit = MenuItemBuilder::with_id("quit", "Quit").build(app)?;
     let menu = MenuBuilder::new(app).items(&[&show, &quit]).build()?;
 
     TrayIconBuilder::new()
         .icon(app.default_window_icon().cloned().unwrap())
-        .tooltip("GameGobler")
+        .tooltip("GameGobbler")
         .menu(&menu)
         .on_menu_event(|app, event| match event.id().as_ref() {
             "show" => {
@@ -100,6 +100,7 @@ struct SidecarChild(std::sync::Mutex<Option<tauri_plugin_shell::process::Command
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .setup(|app| {
             if cfg!(debug_assertions) {

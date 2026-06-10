@@ -1,4 +1,4 @@
-"""Tests for gamegobler.cover_scraper — libretro thumbnail scraping."""
+"""Tests for gamegobbler.cover_scraper — libretro thumbnail scraping."""
 
 from pathlib import Path
 
@@ -6,7 +6,7 @@ import httpx
 import pytest
 import respx
 
-from gamegobler.cover_scraper import (
+from gamegobbler.cover_scraper import (
     SYSTEM_MAP,
     cover_url,
     libretro_thumb_name,

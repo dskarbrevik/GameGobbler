@@ -46,7 +46,7 @@ export function BackendGate({ children }: { children: React.ReactNode }) {
     <div className="splash">
       <div className="splash-content">
         <div className="splash-icon">🎮</div>
-        <h1 className="splash-title">GameGobler</h1>
+        <h1 className="splash-title">GameGobbler</h1>
         {error ? (
           <p className="splash-status splash-error">
             Could not connect to backend. Please restart the app.

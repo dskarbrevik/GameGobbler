@@ -1,4 +1,4 @@
-/** API client for the GameGobler backend. */
+/** API client for the GameGobbler backend. */
 
 import type {
   DeviceFile,

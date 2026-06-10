@@ -12,15 +12,15 @@ install: ## Install Python deps (inc. dev group)
 	uv sync --group dev
 
 lint: ## Ruff lint + format check (Python)
-	uv run ruff check gamegobler
-	uv run ruff format --check gamegobler
+	uv run ruff check gamegobbler
+	uv run ruff format --check gamegobbler
 
 format: ## Auto-format Python code
-	uv run ruff check --fix gamegobler
-	uv run ruff format gamegobler
+	uv run ruff check --fix gamegobbler
+	uv run ruff format gamegobbler
 
 typecheck: ## Pyright type check (Python)
-	uv run pyright gamegobler
+	uv run pyright gamegobbler
 
 test: ## Run pytest
 	uv run pytest; ret=$$?; if [ $$ret -eq 5 ]; then echo "(no tests collected — ok for now)"; else exit $$ret; fi
@@ -53,27 +53,27 @@ build: fe-build ## Build frontend and verify backend can serve it
 	@echo "✓ Frontend built to web/dist/ — run 'make prod' to start"
 
 prod: build ## Start single-process production server
-	uv run gamegobler-api
+	uv run gamegobbler-api
 
 dev-split: ## Start backend + frontend dev servers (hot reload)
 	@echo "Starting backend on http://127.0.0.1:8000 ..."
-	@uv run gamegobler-api &
+	@uv run gamegobbler-api &
 	@echo "Starting frontend on http://localhost:5173 ..."
 	@cd web && npx vite
 
 dev: dev-split ## Alias for dev-split
 
 clean: ## Remove build artifacts
-	rm -rf web/dist .venv .pytest_cache .ruff_cache gamegobler/__pycache__ \
-		gamegobler/**/__pycache__ web/node_modules/.vite build dist
+	rm -rf web/dist .venv .pytest_cache .ruff_cache gamegobbler/__pycache__ \
+		gamegobbler/**/__pycache__ web/node_modules/.vite build dist
 
 package: build ## Build single-binary with PyInstaller
-	uv run pyinstaller gamegobler.spec --noconfirm
-	@echo "✓ Binary at dist/GameGobler"
+	uv run pyinstaller gamegobbler.spec --noconfirm
+	@echo "✓ Binary at dist/GameGobbler"
 
 bump-version: ## Bump version: make bump-version V=1.0.0
 	@test -n "$(V)" || (echo "Usage: make bump-version V=1.0.0" && exit 1)
 	@sed -i'' -e 's/^version = .*/version = "$(V)"/' pyproject.toml && rm -f pyproject.toml-e
-	@sed -i'' -e 's/^__version__ = .*/__version__ = "$(V)"/' gamegobler/__init__.py && rm -f gamegobler/__init__.py-e
+	@sed -i'' -e 's/^__version__ = .*/__version__ = "$(V)"/' gamegobbler/__init__.py && rm -f gamegobbler/__init__.py-e
 	@cd web && npm version $(V) --no-git-tag-version --allow-same-version
 	@echo "✓ Version bumped to $(V) in pyproject.toml, __init__.py, package.json"
