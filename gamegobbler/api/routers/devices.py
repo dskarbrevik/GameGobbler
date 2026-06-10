@@ -16,11 +16,11 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from gamegobler import settings
-from gamegobler.api.models import DeviceFile, DeviceInfo, SearchResult, StorageInfo
-from gamegobler.platform import get_platform
-from gamegobler.rom_parser import parse_rom_filename
-from gamegobler.transfer import ADBManager
+from gamegobbler import settings
+from gamegobbler.api.models import DeviceFile, DeviceInfo, SearchResult, StorageInfo
+from gamegobbler.platform import get_platform
+from gamegobbler.rom_parser import parse_rom_filename
+from gamegobbler.transfer import ADBManager
 
 router = APIRouter()
 

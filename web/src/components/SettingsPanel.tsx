@@ -122,7 +122,7 @@ function SettingsForm({
             Save Settings
           </button>
           {updateMut.isSuccess && (
-            <span className="success-msg">Saved to ~/.gamegobler/</span>
+            <span className="success-msg">Saved to ~/.gamegobbler/</span>
           )}
           {updateMut.isError && (
             <span className="error-msg">

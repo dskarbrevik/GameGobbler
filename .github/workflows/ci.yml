@@ -28,13 +28,13 @@ jobs:
         run: uv sync --group dev
 
       - name: Ruff lint
-        run: uv run ruff check gamegobler
+        run: uv run ruff check gamegobbler
 
       - name: Ruff format
-        run: uv run ruff format --check gamegobler
+        run: uv run ruff format --check gamegobbler
 
       - name: Pyright
-        run: uv run pyright gamegobler
+        run: uv run pyright gamegobbler
 
       - name: Pytest
         run: uv run pytest --tb=short -q

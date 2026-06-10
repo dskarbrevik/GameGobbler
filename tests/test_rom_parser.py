@@ -1,8 +1,8 @@
-"""Tests for gamegobler.rom_parser — No-Intro filename parsing."""
+"""Tests for gamegobbler.rom_parser — No-Intro filename parsing."""
 
 import pytest
 
-from gamegobler.rom_parser import RomMeta, parse_rom_filename
+from gamegobbler.rom_parser import RomMeta, parse_rom_filename
 
 
 # ── Basic title + region ────────────────────────────────────────────────────

@@ -5,7 +5,7 @@ import os
 import subprocess
 from pathlib import Path
 
-from gamegobler.platform.base import (
+from gamegobbler.platform.base import (
     EjectResult,
     FormatResult,
     PlatformBackend,

@@ -3,7 +3,7 @@
 import os
 import subprocess
 
-from gamegobler.platform.base import (
+from gamegobbler.platform.base import (
     EjectResult,
     FormatResult,
     PlatformBackend,

@@ -1,12 +1,12 @@
 # -*- mode: python ; coding: utf-8 -*-
-"""PyInstaller spec for GameGobler single-binary build.
+"""PyInstaller spec for GameGobbler single-binary build.
 
 Usage:
-    cd /path/to/GameGobler
+    cd /path/to/GameGobbler
     # Build frontend first:
     cd web && npm ci && npx vite build && cd ..
     # Then package:
-    uv run pyinstaller gamegobler.spec
+    uv run pyinstaller gamegobbler.spec
 """
 
 import os
@@ -24,14 +24,14 @@ if not DIST_DIR.is_dir():
     )
 
 a = Analysis(
-    [str(ROOT / "gamegobler" / "api" / "main.py")],
+    [str(ROOT / "gamegobbler" / "api" / "main.py")],
     pathex=[str(ROOT)],
     binaries=[],
     datas=[
         # Bundle the built frontend
         (str(DIST_DIR), os.path.join("web", "dist")),
         # Bundle the platform modules (needed at runtime)
-        (str(ROOT / "gamegobler" / "platform"), os.path.join("gamegobler", "platform")),
+        (str(ROOT / "gamegobbler" / "platform"), os.path.join("gamegobbler", "platform")),
     ],
     hiddenimports=[
         "uvicorn.logging",
@@ -44,9 +44,9 @@ a = Analysis(
         "uvicorn.protocols.websockets.auto",
         "uvicorn.lifespan",
         "uvicorn.lifespan.on",
-        "gamegobler.platform.linux",
-        "gamegobler.platform.macos",
-        "gamegobler.platform.windows",
+        "gamegobbler.platform.linux",
+        "gamegobbler.platform.macos",
+        "gamegobbler.platform.windows",
     ],
     hookspath=[],
     hooksconfig={},
@@ -64,7 +64,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="GameGobler",
+    name="GameGobbler",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

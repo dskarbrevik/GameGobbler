@@ -1,10 +1,10 @@
 [package]
-name = "gamegobler-tauri"
+name = "gamegobbler-tauri"
 version = "0.1.2"
-description = "GameGobler — ROM library manager desktop app"
+description = "GameGobbler — ROM library manager desktop app"
 authors = ["dskarbrevik"]
 license = "MIT"
-repository = "https://github.com/dskarbrevik/GameGobler"
+repository = "https://github.com/dskarbrevik/GameGobbler"
 edition = "2021"
 rust-version = "1.77.2"
 

@@ -226,7 +226,7 @@ function App() {
       <nav className="sidebar">
         <div className="sidebar-brand">
           <Gamepad2 size={24} />
-          <span>GameGobler</span>
+          <span>GameGobbler</span>
         </div>
         {NAV.map(({ to, label, icon: Icon }) => (
           <NavLink

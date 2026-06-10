@@ -13,7 +13,7 @@ test.describe("App Shell & Navigation", () => {
 
   test("shows sidebar with brand and nav items", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator(".sidebar-brand")).toContainText("GameGobler");
+    await expect(page.locator(".sidebar-brand")).toContainText("GameGobbler");
     await expect(page.locator(".nav-btn", { hasText: "Devices" })).toBeVisible();
     await expect(page.locator(".nav-btn", { hasText: "Library" })).toBeVisible();
     await expect(page.locator(".nav-btn", { hasText: "Settings" })).toBeVisible();

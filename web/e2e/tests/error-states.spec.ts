@@ -82,7 +82,7 @@ test.describe("API Error States", () => {
     await page.goto("/");
     // Should gracefully show wizard, not an error page
     await expect(page.locator(".setup-wizard")).toBeVisible();
-    await expect(page.locator("h1")).toHaveText("Welcome to GameGobler");
+    await expect(page.locator("h1")).toHaveText("Welcome to GameGobbler");
   });
 
   test("error state visual snapshot — settings save error", async ({ page }) => {

@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, Field
 
-from gamegobler.rom_parser import RomMeta  # re-exported for API use
+from gamegobbler.rom_parser import RomMeta  # re-exported for API use
 
 
 class StorageInfo(BaseModel):

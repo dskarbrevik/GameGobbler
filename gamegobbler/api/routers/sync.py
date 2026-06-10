@@ -7,8 +7,8 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
-from gamegobler.api.models import SyncPreview, SyncPreviewItem, SyncRequest, SyncResult
-from gamegobler.transfer import ADBManager
+from gamegobbler.api.models import SyncPreview, SyncPreviewItem, SyncRequest, SyncResult
+from gamegobbler.transfer import ADBManager
 
 router = APIRouter()
 

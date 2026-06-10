@@ -1,7 +1,7 @@
-"""Centralized settings management for GameGobler.
+"""Centralized settings management for GameGobbler.
 
 All settings I/O goes through this module. Settings are stored in
-``~/.gamegobler/settings.json`` with a ``schema_version`` field for
+``~/.gamegobbler/settings.json`` with a ``schema_version`` field for
 forward-compatible migrations.
 """
 
@@ -11,7 +11,7 @@ import stat
 from pathlib import Path
 from typing import Any
 
-SETTINGS_DIR = Path.home() / ".gamegobler"
+SETTINGS_DIR = Path.home() / ".gamegobbler"
 SETTINGS_PATH = SETTINGS_DIR / "settings.json"
 
 # Bump when the shape of the settings dict changes.

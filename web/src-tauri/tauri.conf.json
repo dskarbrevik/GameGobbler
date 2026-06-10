@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "GameGobler",
+  "productName": "GameGobbler",
   "version": "0.1.2",
-  "identifier": "com.github.dskarbrevik.gamegobler",
+  "identifier": "com.github.dskarbrevik.gamegobbler",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "GameGobler",
+        "title": "GameGobbler",
         "label": "main",
         "width": 1200,
         "height": 800,
@@ -61,9 +61,9 @@
     "shortDescription": "ROM library manager for microSD cards and Android devices",
     "longDescription": "A cross-platform tool that makes adding and removing games to microSD cards and Android devices a seamless experience. Browse your ROM library with cover art, discover connected devices, and transfer games with progress tracking.",
     "copyright": "Copyright (c) dskarbrevik",
-    "homepage": "https://dskarbrevik.github.io/GameGobler",
+    "homepage": "https://dskarbrevik.github.io/GameGobbler",
     "externalBin": [
-      "binaries/gamegobler-api"
+      "binaries/gamegobbler-api"
     ],
     "createUpdaterArtifacts": true
   },
@@ -71,7 +71,7 @@
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI0OUVCRkJEMUZFQkFBM0EKUldRNnF1c2Z2YitlSklWNkxObWpTYm5KbTdkcFRMdDVKVE9nYmRDNVhSb1lGYXlKdHNzeE15cnYK",
       "endpoints": [
-        "https://github.com/dskarbrevik/GameGobler/releases/latest/download/latest.json"
+        "https://github.com/dskarbrevik/GameGobbler/releases/latest/download/latest.json"
       ]
     }
   }

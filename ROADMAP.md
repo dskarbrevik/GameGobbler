@@ -1,4 +1,4 @@
-# GameGobler Roadmap
+# GameGobbler Roadmap
 
 > A versatile way to connect a ROM library to microSD cards or Android devices — making adding and removing games a fun, seamless experience on Mac, Linux, and Windows.
 
@@ -27,22 +27,22 @@ All platforms share one codebase. OS-specific behavior (volume discovery, ejecti
 
 ## Phase 1: Foundation — Make It Work Everywhere
 
-Goal: Cross-platform parity and security hardening. After this phase, GameGobler works correctly on macOS, Linux, and Windows.
+Goal: Cross-platform parity and security hardening. After this phase, GameGobbler works correctly on macOS, Linux, and Windows.
 
 | #   | Task                                        | Status      | Notes |
 |-----|---------------------------------------------|-------------|-------|
-| 1.1 | Platform abstraction module                 | Done        | `gamegobler/platform/{base,linux,macos,windows}.py` with common interface: `discover_volumes()`, `eject_volume()`, `format_volume()`, `get_volume_info()` |
+| 1.1 | Platform abstraction module                 | Done        | `gamegobbler/platform/{base,linux,macos,windows}.py` with common interface: `discover_volumes()`, `eject_volume()`, `format_volume()`, `get_volume_info()` |
 | 1.2 | Linux platform implementation               | Done        | Extracted existing `lsblk`/`udisksctl` logic from `devices.py` into `platform/linux.py` |
 | 1.3 | macOS platform implementation               | Done        | `diskutil` with plistlib parsing; `/Volumes/` scanning; system volume filtering |
 | 1.4 | Windows platform implementation             | Done        | PowerShell `Get-Volume`; `Format-Volume`; COM `Shell.Application` for eject |
 | 1.5 | Wire filesystem transfers for volumes       | Done        | `shutil.copy2` for non-ADB devices in sync.py; volume file listing via pathlib |
 | 1.6 | Security hardening                          | Done        | ADB path injection validation; path traversal checks in remove-game; bind 127.0.0.1 |
-| 1.7 | Unified settings module                     | Done        | `gamegobler/settings.py` — load/save/get/put API; schema version 1; migration support |
-| 1.8 | Configurable CORS origins                   | Done        | `GAMEGOBLER_CORS_ORIGINS` env var; defaults include localhost variants |
+| 1.7 | Unified settings module                     | Done        | `gamegobbler/settings.py` — load/save/get/put API; schema version 1; migration support |
+| 1.8 | Configurable CORS origins                   | Done        | `GAMEGOBBLER_CORS_ORIGINS` env var; defaults include localhost variants |
 | 1.9 | Clean dead code                             | Done        | Removed `App.css`, orphaned `SyncPanel.tsx`; updated tests for new component APIs |
 | 1.10| Root README                                 | Done        | Architecture overview, quick start, env vars, project structure |
 
-**Exit criteria:** GameGobler can discover, browse, eject, and transfer files to a USB volume on all three platforms. No known path traversal or injection vulnerabilities.
+**Exit criteria:** GameGobbler can discover, browse, eject, and transfer files to a USB volume on all three platforms. No known path traversal or injection vulnerabilities.
 
 ---
 
@@ -66,11 +66,11 @@ Goal: Automated testing, linting, and CI pipeline. Confidence that changes don't
 
 ## Phase 3: Distribution — Make It Accessible
 
-Goal: Non-technical users can download and run GameGobler with minimal setup.
+Goal: Non-technical users can download and run GameGobbler with minimal setup.
 
 | #   | Task                                        | Status      | Notes |
 |-----|---------------------------------------------|-------------|-------|
-| 3.1 | Serve frontend from backend                 | Done        | `vite build` → `web/dist/`; FastAPI `StaticFiles` + catch-all SPA fallback; single-process `gamegobler-api` serves both API + UI |
+| 3.1 | Serve frontend from backend                 | Done        | `vite build` → `web/dist/`; FastAPI `StaticFiles` + catch-all SPA fallback; single-process `gamegobbler-api` serves both API + UI |
 | 3.2 | Single-binary packaging                     | Done        | PyInstaller spec; bundles Python + frontend + platform modules; `sys._MEIPASS` for frozen data; 18 MB arm64 binary verified |
 | 3.3 | GitHub Releases workflow                    | Done        | `.github/workflows/release.yml` — `v*` tag trigger; matrix build (Linux, macOS, Windows); PyInstaller + `softprops/action-gh-release` |
 | 3.4 | First-run wizard                            | Done        | `SetupWizard` component shown when `library_path` is empty; guided path selection; saves settings and transitions to main UI |
@@ -84,20 +84,20 @@ Goal: Non-technical users can download and run GameGobler with minimal setup.
 
 ## Phase 4: Native Desktop App — Make It a Real App
 
-Goal: GameGobler feels like a native desktop application — not a CLI tool that opens a browser.
+Goal: GameGobbler feels like a native desktop application — not a CLI tool that opens a browser.
 
 **Approach:** Wrap the existing React frontend + Python backend in **Tauri v2**. The React UI renders in a native OS webview window; the Python backend runs as a Tauri sidecar process. Tauri handles installers, code signing, auto-updates, and native window management.
 
 | #   | Task                                        | Status      | Notes |
 |-----|---------------------------------------------|-------------|-------|
 | 4.1 | Tauri v2 project scaffolding                | Done        | `web/src-tauri/` with `tauri.conf.json`, Rust boilerplate, capabilities, icons; `@tauri-apps/cli` + `@tauri-apps/api` added to `web/package.json` |
-| 4.2 | Python backend as Tauri sidecar             | Done        | `externalBin` in `tauri.conf.json`; `tauri-plugin-shell` for sidecar spawn; Rust `lib.rs` launches `gamegobler-api`, logs output, kills on window close; dev wrapper script in `binaries/` |
+| 4.2 | Python backend as Tauri sidecar             | Done        | `externalBin` in `tauri.conf.json`; `tauri-plugin-shell` for sidecar spawn; Rust `lib.rs` launches `gamegobbler-api`, logs output, kills on window close; dev wrapper script in `binaries/` |
 | 4.3 | Auto-open UI in native window               | Done        | `BackendGate` component polls `/api/health` with spinner splash; CSS splash screen in `index.css`; wired into `main.tsx` |
-| 4.4 | App icons & metadata                        | Done        | Custom SVG icon with GG/controller motif; `tauri icon` generated all sizes (`.icns`, `.ico`, `.png`); bundle ID `com.github.dskarbrevik.gamegobler` |
+| 4.4 | App icons & metadata                        | Done        | Custom SVG icon with GG/controller motif; `tauri icon` generated all sizes (`.icns`, `.ico`, `.png`); bundle ID `com.github.dskarbrevik.gamegobbler` |
 | 4.5 | macOS `.dmg` + code signing + notarization  | Config ready | `tauri.conf.json` + release workflow configured; needs `APPLE_CERTIFICATE`, `APPLE_CERTIFICATE_PASSWORD`, `APPLE_SIGNING_IDENTITY`, `APPLE_ID`, `APPLE_PASSWORD`, `APPLE_TEAM_ID` secrets |
 | 4.6 | Windows `.msi` installer                    | Config ready | `tauri-action` produces `.msi` via WiX; needs `WINDOWS_CERTIFICATE` + `WINDOWS_CERTIFICATE_PASSWORD` secrets |
 | 4.7 | Linux `.AppImage` + `.deb`                  | Config ready | `tauri-action` produces both; release workflow configured; no signing needed |
-| 4.8 | System tray integration                     | Done        | Tray icon with "Show GameGobler" / "Quit" menu; window hides on close (keeps backend alive); click tray to re-show; sidecar killed on quit |
+| 4.8 | System tray integration                     | Done        | Tray icon with "Show GameGobbler" / "Quit" menu; window hides on close (keeps backend alive); click tray to re-show; sidecar killed on quit |
 | 4.9 | Tauri auto-updater                          | Done        | `tauri-plugin-updater` registered; background update check on startup; signing key generated; `createUpdaterArtifacts: true` in config; `.tar.gz` updater artifact verified |
 | 4.10| Release workflow update                     | Done        | Two-stage workflow: `build-sidecar` (PyInstaller per-platform) → `build-tauri` (`tauri-action` produces `.dmg`, `.msi`, `.AppImage`, `.deb`); auto-creates GitHub Release |
 
@@ -107,7 +107,7 @@ Goal: GameGobler feels like a native desktop application — not a CLI tool that
 
 ## Phase 5: Polish — Make It Delightful
 
-Goal: Quality-of-life features that make GameGobler the best tool for the job.
+Goal: Quality-of-life features that make GameGobbler the best tool for the job.
 
 | #   | Task                                        | Status      | Notes |
 |-----|---------------------------------------------|-------------|-------|

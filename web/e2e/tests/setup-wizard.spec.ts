@@ -9,7 +9,7 @@ test.describe("Setup Wizard", () => {
 
   test("shows wizard when library_path is empty", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("h1")).toHaveText("Welcome to GameGobler");
+    await expect(page.locator("h1")).toHaveText("Welcome to GameGobbler");
     await expect(page.locator(".setup-wizard")).toBeVisible();
   });
 

@@ -6,10 +6,10 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
 
-from gamegobler import settings
-from gamegobler.api.models import GameFile, SearchResult, SystemInfo
-from gamegobler.cover_scraper import SYSTEM_MAP, scrape_covers
-from gamegobler.rom_parser import parse_rom_filename
+from gamegobbler import settings
+from gamegobbler.api.models import GameFile, SearchResult, SystemInfo
+from gamegobbler.cover_scraper import SYSTEM_MAP, scrape_covers
+from gamegobbler.rom_parser import parse_rom_filename
 
 router = APIRouter()
 

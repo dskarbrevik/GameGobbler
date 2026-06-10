@@ -29,7 +29,7 @@ export function SetupWizard({ onComplete }: { onComplete: () => void }) {
       <div className="setup-card">
         <div className="setup-header">
           <Gamepad2 size={36} />
-          <h1>Welcome to GameGobler</h1>
+          <h1>Welcome to GameGobbler</h1>
           <p className="muted">
             Let&apos;s get your ROM library set up so you can manage and sync
             games to your devices.

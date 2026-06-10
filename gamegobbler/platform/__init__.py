@@ -5,29 +5,29 @@ ejection, formatting) while delegating to the correct platform backend.
 
 Usage::
 
-    from gamegobler.platform import get_platform
+    from gamegobbler.platform import get_platform
     plat = get_platform()
     volumes = plat.discover_volumes(exclude_paths={"/mnt/library"})
 """
 
 import platform as _platform
 
-from gamegobler.platform.base import PlatformBackend, VolumeCandidate, VolumeInfo
+from gamegobbler.platform.base import PlatformBackend, VolumeCandidate, VolumeInfo
 
 
 def get_platform() -> PlatformBackend:
     """Return the correct :class:`PlatformBackend` for the running OS."""
     system = _platform.system()
     if system == "Linux":
-        from gamegobler.platform.linux import LinuxPlatform
+        from gamegobbler.platform.linux import LinuxPlatform
 
         return LinuxPlatform()
     elif system == "Darwin":
-        from gamegobler.platform.macos import MacOSPlatform
+        from gamegobbler.platform.macos import MacOSPlatform
 
         return MacOSPlatform()
     elif system == "Windows":
-        from gamegobler.platform.windows import WindowsPlatform
+        from gamegobbler.platform.windows import WindowsPlatform
 
         return WindowsPlatform()
     else:

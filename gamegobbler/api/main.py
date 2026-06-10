@@ -1,4 +1,4 @@
-"""FastAPI application for GameGobler Web UI."""
+"""FastAPI application for GameGobbler Web UI."""
 
 import os
 import sys
@@ -10,23 +10,23 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from gamegobler import __version__, settings
-from gamegobler.api.routers import devices, library, sync
+from gamegobbler import __version__, settings
+from gamegobbler.api.routers import devices, library, sync
 
 app = FastAPI(
-    title="GameGobler API",
+    title="GameGobbler API",
     version=__version__,
     description="Web API for managing ROM libraries and device transfers",
 )
 
-# CORS: configurable via GAMEGOBLER_CORS_ORIGINS env var (comma-separated).
+# CORS: configurable via GAMEGOBBLER_CORS_ORIGINS env var (comma-separated).
 # Defaults to common local dev origins + Tauri webview origins.
 _default_origins = (
     "http://localhost:5173,http://localhost:8000,"
     "http://127.0.0.1:5173,http://127.0.0.1:8000,"
     "tauri://localhost,https://tauri.localhost"
 )
-_origins = os.environ.get("GAMEGOBLER_CORS_ORIGINS", _default_origins)
+_origins = os.environ.get("GAMEGOBBLER_CORS_ORIGINS", _default_origins)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip() for o in _origins.split(",") if o.strip()],
@@ -94,7 +94,7 @@ async def version() -> dict:
     try:
         async with httpx.AsyncClient(timeout=5) as client:
             resp = await client.get(
-                "https://api.github.com/repos/dskarbrevik/GameGobler/releases/latest",
+                "https://api.github.com/repos/dskarbrevik/GameGobbler/releases/latest",
                 headers={"Accept": "application/vnd.github+json"},
             )
         if resp.status_code == 200:
@@ -146,7 +146,7 @@ _mount_frontend()
 
 
 def _kill_stale_server(host: str, port: int) -> None:
-    """If a previous GameGobler backend is still running on this port, kill it."""
+    """If a previous GameGobbler backend is still running on this port, kill it."""
     import socket
     import signal
 
@@ -185,9 +185,9 @@ def start() -> None:
     import uvicorn
 
     # Bind to loopback only by default for security.
-    # Override with GAMEGOBLER_HOST / GAMEGOBLER_PORT env vars.
-    host = os.environ.get("GAMEGOBLER_HOST", "127.0.0.1")
-    port = int(os.environ.get("GAMEGOBLER_PORT", "8000"))
+    # Override with GAMEGOBBLER_HOST / GAMEGOBBLER_PORT env vars.
+    host = os.environ.get("GAMEGOBBLER_HOST", "127.0.0.1")
+    port = int(os.environ.get("GAMEGOBBLER_PORT", "8000"))
 
     _kill_stale_server(host, port)
 
@@ -199,7 +199,7 @@ def start() -> None:
         # When running as a PyInstaller binary, import the app directly
         uvicorn.run(app, host=host, port=port)
     else:
-        uvicorn.run("gamegobler.api.main:app", host=host, port=port, reload=reload)
+        uvicorn.run("gamegobbler.api.main:app", host=host, port=port, reload=reload)
 
 
 if __name__ == "__main__":

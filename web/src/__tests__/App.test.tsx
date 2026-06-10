@@ -61,7 +61,7 @@ function renderWithProviders(ui: React.ReactElement) {
 describe("App", () => {
   it("renders the sidebar brand", async () => {
     renderWithProviders(<App />);
-    expect(await screen.findByText("GameGobler")).toBeInTheDocument();
+    expect(await screen.findByText("GameGobbler")).toBeInTheDocument();
   });
 
   it("renders navigation links", async () => {
@@ -96,6 +96,6 @@ describe("App", () => {
     });
 
     renderWithProviders(<App />);
-    expect(await screen.findByText("Welcome to GameGobler")).toBeInTheDocument();
+    expect(await screen.findByText("Welcome to GameGobbler")).toBeInTheDocument();
   });
 });

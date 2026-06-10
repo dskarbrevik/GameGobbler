@@ -1,4 +1,4 @@
-"""File transfer module for GameGobler - supports filesystem and ADB transfers."""
+"""File transfer module for GameGobbler - supports filesystem and ADB transfers."""
 
 import asyncio
 import re
@@ -20,7 +20,7 @@ from rich.progress import (
     TransferSpeedColumn,
 )
 
-from gamegobler.config import TransferConfig, TransferSystemConfig
+from gamegobbler.config import TransferConfig, TransferSystemConfig
 
 console = Console()
 

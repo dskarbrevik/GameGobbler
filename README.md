@@ -1,4 +1,4 @@
-# GameGobler
+# GameGobbler
 
 A cross-platform ROM library manager that makes adding and removing games to microSD cards and Android devices a seamless experience — on macOS, Linux, and Windows.
 
@@ -17,17 +17,17 @@ A cross-platform ROM library manager that makes adding and removing games to mic
 │   React 19 + TypeScript     │  ← web/
 │   Vite · React Query        │
 ├─────────────────────────────┤
-│   FastAPI REST + SSE        │  ← gamegobler/api/
+│   FastAPI REST + SSE        │  ← gamegobbler/api/
 │   Pydantic models           │
 ├──────────┬──────────────────┤
 │ Platform │  ROM Parser      │
-│ Linux    │  Cover Scraper   │  ← gamegobler/
+│ Linux    │  Cover Scraper   │  ← gamegobbler/
 │ macOS    │  ADB Manager     │
 │ Windows  │  Settings        │
 └──────────┴──────────────────┘
 ```
 
-**Platform abstraction:** OS-specific volume operations (discovery, ejection, formatting) live behind a common interface in `gamegobler/platform/`, with per-OS implementations. Everything else is shared.
+**Platform abstraction:** OS-specific volume operations (discovery, ejection, formatting) live behind a common interface in `gamegobbler/platform/`, with per-OS implementations. Everything else is shared.
 
 ## Quick Start
 
@@ -41,11 +41,11 @@ A cross-platform ROM library manager that makes adding and removing games to mic
 
 ```bash
 # Install with uv (recommended)
-uv run gamegobler-api
+uv run gamegobbler-api
 
 # Or with pip
 pip install -e .
-gamegobler-api
+gamegobbler-api
 ```
 
 The API starts at `http://127.0.0.1:8000`.
@@ -62,7 +62,7 @@ Open `http://localhost:5173` in your browser.
 
 ### Configuration
 
-On first run, visit **Settings** to set your ROM library path. GameGobler expects a directory structure like:
+On first run, visit **Settings** to set your ROM library path. GameGobbler expects a directory structure like:
 
 ```
 /path/to/roms/
@@ -83,14 +83,14 @@ On first run, visit **Settings** to set your ROM library path. GameGobler expect
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `GAMEGOBLER_HOST` | `127.0.0.1` | API bind address |
-| `GAMEGOBLER_PORT` | `8000` | API port |
-| `GAMEGOBLER_CORS_ORIGINS` | `http://localhost:5173,...` | Comma-separated allowed origins |
+| `GAMEGOBBLER_HOST` | `127.0.0.1` | API bind address |
+| `GAMEGOBBLER_PORT` | `8000` | API port |
+| `GAMEGOBBLER_CORS_ORIGINS` | `http://localhost:5173,...` | Comma-separated allowed origins |
 
 ## Project Structure
 
 ```
-gamegobler/             # Python backend
+gamegobbler/             # Python backend
 ├── api/                # FastAPI routes
 │   ├── main.py         # App entry point
 │   ├── models.py       # Pydantic schemas
@@ -119,7 +119,7 @@ web/                    # React frontend
 
 ```bash
 # Lint Python
-uv run ruff check gamegobler/
+uv run ruff check gamegobbler/
 
 # Lint + test frontend
 cd web && npm run lint && npm test

@@ -26,7 +26,7 @@ export const VERSION_WITH_UPDATE = {
   version: "0.1.2",
   latest: "0.2.0",
   update_available: true,
-  release_url: "https://github.com/dskarbrevik/GameGobler/releases/tag/v0.2.0",
+  release_url: "https://github.com/dskarbrevik/GameGobbler/releases/tag/v0.2.0",
 };
 
 export const SYSTEMS = [

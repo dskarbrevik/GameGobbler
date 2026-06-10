@@ -3,7 +3,7 @@
 # In production builds, this is replaced by the PyInstaller binary.
 #
 # Tauri expects the sidecar at:
-#   binaries/gamegobler-api-<target-triple>
+#   binaries/gamegobbler-api-<target-triple>
 # This script must be named accordingly for your platform.
 
 set -euo pipefail
@@ -13,4 +13,4 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 cd "$REPO_ROOT"
-exec uv run gamegobler-api "$@"
+exec uv run gamegobbler-api "$@"
