@@ -1,6 +1,6 @@
 [package]
 name = "gamegobbler-tauri"
-version = "0.1.2"
+version = "0.1.3"
 description = "GameGobbler — ROM library manager desktop app"
 authors = ["dskarbrevik"]
 license = "MIT"
