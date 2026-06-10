@@ -1,3 +1,3 @@
 """GameGobbler - ROM library manager web app with device sync."""
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
