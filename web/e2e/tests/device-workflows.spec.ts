@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { mockApi } from "../mock-api";
-import * as fixtures from "../fixtures";
 
 test.describe("Device Workflows", () => {
   test.beforeEach(async ({ page }) => {

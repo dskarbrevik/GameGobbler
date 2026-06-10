@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { mockApi } from "../mock-api";
-import * as fixtures from "../fixtures";
 
 test.describe("Toast Notifications", () => {
   test("settings save shows success toast", async ({ page }) => {
